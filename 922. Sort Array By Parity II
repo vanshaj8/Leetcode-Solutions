@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> sortArrayByParityII(vector<int>& arr)
+    {
+        vector<int> narr(arr.size());
+        int n=arr.size();
+        int i_odd=1,i_even=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]%2==0)
+            {
+                narr[i_even]=arr[i];
+                i_even+=2;
+            }
+            else
+            {
+                narr[i_odd]=arr[i];
+                i_odd+=2;
+            }
+        }
+        return narr;
+    }
+};
