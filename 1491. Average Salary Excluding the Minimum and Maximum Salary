@@ -1,0 +1,28 @@
+class Solution {
+public:
+    double average(vector<int>& salary)
+    {
+        if(salary.size()==0)
+        {
+            return 0.00;
+        }
+       // sort(salary.begin(),salary.end());
+        int minimum=salary[0],maximum=salary[0];
+        double sum=0;
+        for(auto sal : salary)
+        {
+            minimum=min(sal,minimum);
+            maximum=max(sal,maximum);
+        }
+        
+        for(auto sal : salary)
+        {
+            if(sal!=minimum && sal!=maximum)
+            {
+                sum+=sal;
+            }
+        }
+        
+        return sum/(salary.size()-2);
+    }
+};
