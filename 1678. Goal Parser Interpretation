@@ -1,0 +1,41 @@
+class Solution 
+{
+public:
+    string interpret(string cmd) 
+    {
+        if(cmd.size()==0)
+        {
+            return cmd;
+        }
+        string res;
+        int i=0;
+        int len=cmd.size();
+        while(i<len)
+        {
+            char curr=cmd.at(i);
+            if(curr=='G')
+            {
+                res+=curr;
+                ++i;
+            }
+            else if(curr=='(')
+            {
+                char next=cmd.at(i+1);
+                if(next==')')
+                {
+                    i+=2;
+                    res+='o';
+                }
+                else
+                {
+                    i+=4;
+                    res+="al";
+                    
+                }
+            }
+        }
+        return res;
+    }
+    
+    
+};
