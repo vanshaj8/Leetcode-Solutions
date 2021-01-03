@@ -50,3 +50,21 @@ public:
         return levels;
     }
 };
+
+
+
+ALSO
+
+class Solution {
+public:
+    int maxDepth(Node* root, int d = 0) {
+        if(!root) {
+            return d;
+        }
+        int m_max = d + 1;
+        for(int i = 0; i < root->children.size(); ++i) {
+            m_max = max(m_max, maxDepth(root->children[i], d + 1));
+        }
+        return m_max;
+    }
+};
