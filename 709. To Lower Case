@@ -1,0 +1,13 @@
+class Solution {
+public:
+    string toLowerCase(string str) 
+    {
+        string st="";
+        for(int i=0;i<str.size();i++)
+        {
+            st+=tolower(str[i]);
+        }
+        
+        return st;
+    }
+};
