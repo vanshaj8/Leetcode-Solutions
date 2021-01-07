@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void search(char* text,char *pattern)
+{
+	int m=strlen(text);
+	int n=strlen(pattern);
+	int j;
+	// A Loop to Slide pat[] one by one 
+	
+	for(int i=0;i<=m-n;i++)
+	{
+		// For current index i check for the pattern match
+		for(j=0;j<n;j++)
+		{
+			if(text[i+j]!=pattern[j])
+			{
+				break;
+			}
+		}
+		if(j==n)
+		{
+			cout<<"Found at index "<<i<<endl;
+		}
+	}
+}
+
+int main()
+{
+	char text[]="AABAACAADAABAAABAA";
+	char pattern[]="AABA";
+	search(text,pattern);
+	
+	return 0;
+}
