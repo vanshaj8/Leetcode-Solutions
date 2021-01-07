@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#include<string.h>
+using namespace std;
+#define d 256
+// q is a prime Number 
+
+void search(char pattern[],char text[],int q)
+{
+	int m=strlen(pattern);
+	int n=strlen(text);
+	int i,j;
+	int p=0; // Hash value for the pattern
+	int t=0; // Hash Value for the pattern
+	int h=1;
+	// The value of h would be "pow(d,m-1)%q"
+	for(i=0;i<m-1;i++)
+	{
+		h=(h*d) % q;
+	}
+	
+	// Calculate the hash value of the Pattern and first window of text
+	for(i=0;i<m;i++)
+	{
+		p=(d * p+ pattern[i])%q; // %Q to prevent from Overflowing
+		t=(d * t + text[i]) %q;
+	}
+	
+	// Slide the pattern over the text one by one
+	for(i=0;i<=n-m;i++)
+	{
+		if(p==t)
+		{
+			for( j=0;j<m;j++)
+			{
+				if(text[i+j]!=pattern[j])
+				{
+					break;
+				}
+			}
+			if(j==m)
+			{
+				cout<<"Pattern found at index "<<i+1<<endl;
+			}
+		}
+		if(i<n-m)
+		{
+			t=(d*(t-text[i]*h)+text[i+m])%q;
+			if(t<0)
+			{
+				t=(t+q);
+			}
+		}
+	}
+	
+}
+
+int main()
+{
+	char text[] = "ABCCDDAEFG";
+  char pattern[] = "CDD";
+  int q = 13;
+	search(pattern,text,q);
+	
+	// return 0;
+}
