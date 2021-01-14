@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+
+struct bstnode
+{
+	int data;
+	bstnode* left;
+	bstnode* right;
+	
+};
+
+bstnode* newNode(int value)
+{
+	bstnode* temp=new bstnode();
+	
+	temp->data=value;
+	temp->left=temp->right=NULL;
+	
+	return temp;
+}
+
+bstnode* insert(bstnode* root,int value)
+{
+	if(root==NULL)
+	{
+		root=newNode(value);
+	}
+	else if(value<=root->data)
+	{
+		root->left=insert(root->left,value);
+	}
+	else
+	{
+		root->right=insert(root->right,value);
+	}
+	
+	return root;
+}
+void storeBSTNodes(bstnode* root,vector<bstnode*>&nodes)
+{
+	if(root==NULL)
+	{
+		return ;
+	}
+	storeBSTNodes(root->left,nodes);
+	nodes.push_back(root);
+	storeBSTNodes(root->right,nodes);
+}
+bstnode* buildTreeUtil(vector<bstnode*>&nodes ,int start,int end)
+{
+	// Base Case
+	if(start>end)
+	{
+		return NULL;
+	}
+	
+	int mid=(start+end)/2;
+	bstnode* root=nodes[mid];
+	root->left=buildTreeUtil(nodes,start,mid-1);
+	root->right=buildTreeUtil(nodes,mid+1,end);	
+	
+	
+	return root;
+}
+bstnode* buildTree(bstnode* root)
+{
+	vector<bstnode*> nodes;
+	storeBSTNodes(root,nodes);
+	int n=nodes.size();
+	return buildTreeUtil(nodes,0,n-1);
+}
+
+void preOrder(bstnode* root)
+{
+	if(root==NULL)
+	{
+		return ;
+	}
+	cout<<root->data<<" ";
+	preOrder(root->left);
+	preOrder(root->right);
+}
+int main()
+{
+	bstnode* root = newNode(10); 
+    root->left = newNode(8); 
+    root->left->left = newNode(7); 
+    root->left->left->left = newNode(6); 
+    root->left->left->left->left = newNode(5); 
+  
+    root = buildTree(root); 
+    cout<<"PreOrder Travesal of BST \n";
+    preOrder(root); 
+	
+	
+	return 0;
+}
