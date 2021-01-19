@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int countGoodRectangles(vector<vector<int>>& rectangles) 
+    {
+        unordered_map<int,int> squarecounts;
+        int maxlen=0;
+        for(vector<int>& rect :rectangles)
+        {
+            int minside=min(rect[0],rect[1]);
+            ++squarecounts[minside];
+            maxlen=max(maxlen,minside);
+        }
+        
+        return squarecounts[maxlen];
+    }
+};
