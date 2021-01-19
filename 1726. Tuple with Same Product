@@ -1,0 +1,36 @@
+class Solution
+{
+	public:
+		
+		int tupleSameProduct(vector<int>& nums)
+		{
+			int n=nums.size();
+			unordered_map<int,int>map;
+			int res=0;
+			
+			for(int i=0;i<n;i++)
+			{
+				for(int j=i+1;j<n;j++)
+				{
+					int prod=nums[i]*nums[j];
+					map[prod]++; // Storing the count of values in the map
+				}
+			}
+			
+			for(pair<int,int> m : map)
+			{
+				int n=m.second();
+				res+=(n*(n-1)/2); // No of Tuples
+			}
+		}
+		
+		return res*8;
+		
+}
+
+/*
+No of ways of arranging (a* b) = 2 {(a,b),(b,a)}
+No of ways of arranging (c*d) = 2 {(c,d),(d,c)}
+No of wasy of arranging (a*b) and (c*d) = 2  {(a*b)=(c*d), (c*d)=(a*b)}
+Hence the total no of ways = 2*2*2 =8 
+*/
