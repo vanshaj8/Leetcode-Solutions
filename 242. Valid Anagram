@@ -1,0 +1,19 @@
+class Solution 
+{
+public:
+    void addvalues(string s,unordered_map<char,int>& mp)
+    {
+        for(auto i : s)
+        {
+            mp[i]++;
+        }
+    }
+    bool isAnagram(string s, string t) 
+    {
+        unordered_map<char,int>m1;
+        unordered_map<char,int>m2;
+        addvalues(s,m1);
+        addvalues(t,m2);
+        return (m1==m2);
+    }
+};
