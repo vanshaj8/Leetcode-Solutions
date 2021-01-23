@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int titleToNumber(string s)
+    {
+        int res=0,factor,j=0;
+        for(int i=s.length()-1;i>=0;i--)
+        {
+            factor=pow(26,j);
+            res+=factor*(s[i]-'A'+1);
+            j++;
+        }
+        
+        return res;
+        
+    }
+};
