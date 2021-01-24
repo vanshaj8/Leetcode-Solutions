@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isHappy(int n) 
+    {
+        while(n>0)
+        {
+            int sum=0;
+            while(n>0)
+            {
+                int d=n%10;
+                sum+=d*d;
+                n=n/10;
+            }
+            if(sum==1)
+            {
+                return true;
+            }
+            else if(sum>1 && sum<10 &&sum!=7)
+            {
+                return false;
+            }
+            else
+            {
+                n=sum;
+            }
+            
+
+        }
+        
+        return false;
+    }
+};
