@@ -53,3 +53,46 @@ public:
         return p1;
     }
 };
+
+
+Using Hash Set
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
+    {
+        set<ListNode*> nodes;
+        ListNode* pa=headA;
+        while(pa!=NULL)
+        {
+            nodes.insert(pa);
+            pa=pa->next;
+        }
+        if(nodes.empty())
+        {
+            return NULL;
+        }
+        ListNode* pb=headB;
+        while(pb!=NULL)
+        {
+            if(nodes.find(pb)!=nodes.end())
+            {
+                return pb;
+            }
+            pb=pb->next;
+        }
+        
+        
+        return NULL;
+    }
+    
+};
