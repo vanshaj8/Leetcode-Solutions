@@ -1,0 +1,78 @@
+class Solution {
+public:
+    bool isSubsequence(string s, string t) 
+    {
+        int n=s.length();
+        int m=t.length();
+        int dp[n+1][m+1];
+        for(int i=0;i<=n;i++)
+        {
+            for(int j=0;j<=m;j++)
+            {
+                if(i==0 || j==0)
+                {
+                    dp[i][j]=0;
+                }
+                else if(s[i-1]==t[j-1])
+                {
+                    dp[i][j]=dp[i-1][j-1]+1;
+                }
+                else
+                {
+                    dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+        
+        return (n==dp[n][m]);
+    }
+};
+
+Time Complexity O(m*n) and Space Complexity O(m*n)
+2nd Solution
+
+
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) 
+    {
+        int pointerTOS=0;
+        int pointerTOT=0;
+        // Edge cases where S has lenght greater than t
+        
+        if(s.length()>t.length())
+        {
+            return false;
+        }
+        
+        if(s.length()==t.length())
+        {
+            return (s==t);
+        }
+        // Else Iterate
+        
+        while(pointerTOT<t.length() && pointerTOS<s.length())
+        {
+            if(s[pointerTOS]==t[pointerTOT])
+            {
+                pointerTOS++;
+                pointerTOT++;
+            }
+            else 
+            {
+                pointerTOT++;
+            }
+        }
+        if(pointerTOS==s.size())
+        {
+            return true;
+        }
+        
+        
+        return false;
+        
+    }
+};
+
+Time Complexity O(n) and O(1) space
