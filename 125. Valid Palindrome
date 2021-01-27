@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isPalindrome(string s)
+    {
+        
+        if(s.empty())
+        {
+            return true;
+        }
+        string temp;
+        for(char c: s)
+        {
+            if(isalnum(c))
+            {
+                temp+=tolower(c);
+            }
+        }
+        
+        for(int i=0,n=temp.length()-1;i<n;i++,n--)
+        {
+            if(temp[i]!=temp[n])
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+};
