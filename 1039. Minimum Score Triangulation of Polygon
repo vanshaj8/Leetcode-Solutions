@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int dp[51][51];
+    int minScoreTriangulation(vector<int>& A) 
+    {
+        memset(dp,-1,sizeof dp);
+        int n=A.size();
+       return matrixchainorder(A,1,n-1); 
+    }
+    
+    int matrixchainorder(vector<int>& A,int i,int j)
+    {
+        int k;
+        if(i==j)
+        {
+            return 0;
+        }
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
+        dp[i][j]=INT_MAX;
+        for(k=i;k<j;k++)
+        {
+            dp[i][j]=min(dp[i][j],matrixchainorder(A,i,k)+matrixchainorder(A,k+1,j)+A[i-1]*A[k]*A[j]);
+        }
+        
+        return dp[i][j];
+    }
+};
