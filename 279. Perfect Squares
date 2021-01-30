@@ -1,0 +1,84 @@
+class Solution {
+public:
+    vector<int> num;
+    void pps(int n)   // Put the perfect squares in action
+    {
+        int sum=1;
+       for(int i=1;i<=n;i++)
+       {
+          sum=i*i;
+           if(sum<=n)
+           {
+               num.push_back(sum);
+           }
+           else
+           {
+               break;
+           }
+           
+       }
+    }
+    // Initilaising at i==0 and j==0
+    int targetsum(int len,int n)
+    {
+        int dp[len+1][n+1];
+        
+        for(int i=0;i<=len;i++)
+        {
+            for(int j=0;j<=n;j++)
+            {
+                if(i==0)
+                {
+                    dp[i][j]=INT_MAX-1;
+                }
+                if(j==0) 
+                {
+                    dp[i][j]=0;
+                }
+            }
+        }
+        
+        // Initalising the second row
+        for(int j=1;j<=n;j++)
+        {
+            if(j%num[0]==0)
+            {
+                dp[1][j]=j/num[0];
+            }
+            else
+            {
+                dp[1][j]=INT_MAX-1;
+            }
+        }
+        
+        // Now intialising the table
+        for(int i=2;i<=len;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if(num[i-1]<=j)
+                {
+                    dp[i][j]=min(dp[i-1][j],dp[i][j-num[i-1]]+1);
+                }
+                else
+                {
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
+        }
+        if(dp[n][amount]==INT_MAX-1)
+        {
+            return -1;
+        }
+        else
+        {
+            retudp[n][amount];
+        }
+    }
+    int numSquares(int n) 
+    {
+        pps(n);
+        int len=num.size();
+        return  targetsum(len,n);
+    }
+};
