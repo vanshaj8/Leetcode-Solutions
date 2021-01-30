@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<vector<int>> res;
+    void backtracking(vector<int>& nums,int i,int level,vector<bool>&visited,vector<int>&v)
+    {
+        if(level==nums.size())
+        {
+            res.push_back(v);
+            return ;
+        }
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            if(visited[i]==true)
+                continue;
+            v[level]=nums[i];
+            visited[i]=true;
+            backtracking(nums,i,level+1,visited,v);
+            visited[i]=false;
+                
+        }
+            
+    }
+    vector<vector<int>> permute(vector<int>& nums) 
+    {
+        vector<bool>visited(nums.size(),false); // Initialsing the values as neagtive
+        vector<int>v(nums.size());
+        int i=0;
+        backtracking(nums,i,0,visited,v);
+        return res;
+    }
+};
