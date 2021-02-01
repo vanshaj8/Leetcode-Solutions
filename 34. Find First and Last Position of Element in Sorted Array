@@ -1,0 +1,59 @@
+class Solution {
+public:
+    int lower(vector<int>& nums,int x)
+    {
+        int high=nums.size()-1;
+        int low=0;
+        int res=-1;
+        while(low<=high)
+        {
+            int mid=low+ (high-low)/2;
+            if(nums[mid]==x)
+            {
+                res=mid;
+                high=mid-1;
+            }
+            else if(nums[mid]<x)
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return res;
+    }
+    int upper(vector<int>& nums,int x)
+    {
+        int high=nums.size()-1;
+        int low=0;
+        int res=-1;
+        while(low<=high)
+        {
+            int mid=low+ (high-low)/2;
+            if(nums[mid]==x)
+            {
+                res=mid;
+                low=mid+1;
+            }
+            else if(nums[mid]<x)
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return res;
+    }
+    vector<int> searchRange(vector<int>& nums, int target)
+    {
+       vector<int> res;
+        res.push_back(lower(nums,target));
+        res.push_back(upper(nums,target));
+        
+        return res;
+    }
+};
