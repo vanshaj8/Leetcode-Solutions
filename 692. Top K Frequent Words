@@ -1,0 +1,72 @@
+class Solution {
+public:
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string,int>mp;
+        priority_queue<pair<int,string>>pq;
+        vector<string>ret;
+        int count=1;
+        for(auto a : words){
+            mp[a]++;
+        }
+        for(auto it = mp.begin();it!=mp.end();it++){
+            pq.push({-it->second, it->first});  // Adding a minus sign  makes it a min heap 
+            
+        }      
+       while(pq.size()>k){
+           cout<<pq.top().second<<endl;
+            pq.pop();
+
+        }
+       while(k--){
+           ret.push_back(pq.top().second);
+           pq.pop();
+       }
+        reverse(ret.begin(),ret.end());
+        return ret;
+    }
+};
+
+
+
+
+2 nd Solution 
+
+
+class Solution {
+public:
+    typedef pair<string , int > pp;
+    struct comp{
+        bool operator()( pair <string, int>& p1, pair<string, int> &p2)
+        {
+            if(p1.second != p2.second ) return (p2.second> p1.second);
+
+             return (p1.first> p2.first);
+        }
+    };
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        priority_queue < pp , vector< pp> , comp> mh;
+        unordered_map <string, int> mp;
+        
+        for(auto i: words)
+        {
+            mp[i]++;
+        }
+        for(auto i: mp)
+        {
+            mh.push({i.first, i.second});
+            
+        }
+        vector<string> v;
+        while(k--)
+        {
+            v.push_back(mh.top().first);
+            mh.pop();
+        }
+        return v;
+        
+        
+        
+        
+        
+    }
+};
