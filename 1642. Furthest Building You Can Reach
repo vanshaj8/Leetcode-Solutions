@@ -5,7 +5,7 @@ public:
         
         priority_queue<int> pq;
         int i;
-        for(i=0;i<heights.size()-1;i++)
+        for(i=0;i<heights.size()-1;i++)  // minus 1 beacuse we are using i+1 and i to avoid overflow of numbers
         {
             if(heights[i+1]<=heights[i])
             {
@@ -21,7 +21,7 @@ public:
             {
                 if(pq.size())
                 {
-                    int x=pq.top();
+                    int x=pq.top();                          // If the max diff is grater than current diff we can use ladder at previous and will add bricks that  have been lost
                     if(x>diff)
                     {
                         pq.pop();
@@ -30,7 +30,7 @@ public:
                         pq.push(diff);
                     }
                 }
-                ladders--;
+                ladders--;   // Ladders will be reduced in either cases
             }
             else break;
         }
