@@ -1,0 +1,53 @@
+class Solution {
+public:
+    string reorganizeString(string str) 
+    {
+        int len=str.length();
+        unordered_map<char,int>mp;
+        for(int i=0;i<len;i++)
+        {
+            mp[str[i]]++;
+        }
+        priority_queue<pair<int,char>>pq;  // creating a max heap
+        for(auto it=mp.begin();it!=mp.end();it++)
+        {
+            pq.push(make_pair(it->second,it->first));
+        }
+        
+        string ans="";
+        while(!pq.empty())
+        {
+            pair<int,char>p=pq.top();
+            pq.pop();
+            ans+=p.second;
+            
+            if(!pq.empty())
+            {
+                pair<int,char> temp=pq.top();
+                pq.pop();
+                ans+=temp.second;
+                if(temp.first-1>0)
+                {
+                    pq.push(make_pair(temp.first-1,temp.second));
+                }
+            }
+            
+            if(p.first-1>0)
+            {
+                pq.push(make_pair(p.first-1,p.second));
+            }
+        }
+        
+        // Compairing stirng now at last
+        
+        for(int i=0;i<ans.size();i++)
+        {
+            if(ans[i]==ans[i+1])
+            {
+                return "";
+            }
+        }
+        
+        return ans;
+    }
+};
