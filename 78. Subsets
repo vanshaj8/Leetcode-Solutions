@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<int>>s;
+    vector<vector<int>> subsets(vector<int>& nums) 
+    {
+        vector<int> choices;
+        helper(nums,choices,0);
+        return s;
+    }
+    void helper(vector<int>&nums,vector<int>&choices,int count)
+    {
+        // Base Case
+        if(count==nums.size())
+        {
+            s.push_back(choices);
+            return ;
+        }
+        // Recurisve case 1 : no choose
+        helper(nums,choices,count+1);
+        
+        // Recrsive case 2: choose make choice
+        choices.push_back(nums[count]);
+        helper(nums,choices,count+1);
+        // unchoose
+        choices.pop_back();
+        return ;
+    }
+};
