@@ -11,61 +11,59 @@
  */
 class Solution {
 public:
-    vector<vector<int>> zigzagLevelOrder(TreeNode* root)
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) 
     {
-        vector<vector<int>> ans;
-        if(root==NULL)
+        vector<vector<int>>ans;
+        stack<TreeNode*>current;
+        stack<TreeNode*>next;
+        TreeNode* curr;
+        bool flag=true;
+        vector<int>res;
+        if(!root)
         {
             return ans;
         }
-        
-        stack<TreeNode*>current;
-        stack<TreeNode*>next;
-        bool lr=true;
         current.push(root);
         while(!current.empty())
         {
-            TreeNode* temp=current.top();
-            vector<int>res;
-            if(temp)
+            int size=current.size();
+            res.clear();
+            for(int i=0;i<size;i++)
             {
-               int size=current.size();
+                if(flag==false)
                 {
-                    res.push_back(temp->val);
-                }
-                if(lr)
-                {
-                    if(temp->left )
+                    curr=current.top();
+                    current.pop();
+                    res.push_back(curr->val);
+                    if(curr->right)
                     {
-                        next.push(root->left);
+                        next.push(curr->right);
                     }
-                    if(root->right)
+                    if(curr->left)
                     {
-                        next.push(root->right);
+                        next.push(curr->left);
                     }
                 }
                 else
                 {
-                    if(root->right)
+                    curr=current.top();
+                    current.pop();
+                    res.push_back(curr->val);
+                    if(curr->left)
                     {
-                        next.push(root->right);
+                        next.push(curr->left);
                     }
-                    else
+                    if(curr->right)
                     {
-                        next.push(root->left);
+                        next.push(curr->right);
                     }
+                    
                 }
             }
-            if(current.empty())
-            {
-                lr=!lr;
-                swap(current,next);
-            }
             ans.push_back(res);
-            res.clear();
+            flag=!flag;
+            swap(current,next);
         }
-        
         return ans;
-        
     }
 };
