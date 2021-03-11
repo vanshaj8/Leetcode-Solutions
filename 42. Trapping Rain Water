@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int trap(vector<int>& height) 
+    {
+        int res=0;
+        
+        int n=height.size();
+        
+        if(n<=2)
+        {
+            return 0;
+        }
+        
+        vector<int>lmax(n),rmax(n);
+        int temp1=height[0];
+        int temp2=height[n-1];
+        
+        for(int i=1;i<n-1;i++)
+        {
+            lmax[i]=temp1;
+            rmax[n-i-1]=temp2;
+            if(height[i]>temp1)
+            {
+                temp1=height[i];
+            }
+            if(height[n-i-1]>temp2)
+            {
+                temp2=height[n-i-1];
+            }
+        }
+        
+        for(int i=1;i<n-1;i++)
+        {
+            if(lmax[i]<=height[i] || rmax[i]<=height[i])
+            {
+                
+            }
+            else
+            {
+            res+=min(lmax[i],rmax[i])-height[i];
+        }}
+            
+        return res;
+    }
+};
