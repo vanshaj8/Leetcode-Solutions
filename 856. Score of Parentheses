@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int scoreOfParentheses(string str) 
+    {
+        int n=str.size();
+        if(n<2)
+        {
+            return 0;
+        }
+        stack<int>s;
+        s.push(0);      
+        for(auto i: str)
+        {
+            if(i=='(')
+            {
+                s.push(0);
+            }
+            else
+            {
+                int x=s.top();s.pop();
+                int y=s.top();s.pop();
+                s.push(y+max(2*x,1));
+                
+            }
+        }
+        
+        return s.top();
+    }
+};
