@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int k)
+    {
+        int i=0,j=0,maxx=0;
+        int n=customers.size();
+        for(int z=0;z<n;z++)
+        {
+            if(grumpy[z]==0)
+            {
+                maxx+=customers[z];
+            }
+        }
+        
+        int maxxsum=0;
+        while(j<n)
+        {
+            int curr=customers[j];
+            if(grumpy[j]==1)
+            {
+                maxx+=curr;
+                
+            }
+            if(j-i+1==k)
+                {
+                    maxxsum=max(maxx,maxxsum);
+                    if(grumpy[i]==1)
+                    {
+                        maxx-=customers[i];
+                    }
+                i++;
+                }
+            j++;
+        }
+     
+        return maxxsum;
+    }
+};
