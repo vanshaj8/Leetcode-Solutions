@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int maxScore(vector<int>& nums, int k) 
+    {
+        int count=nums.size()-k;
+        int i=0,j=0,sum=0;
+        for(auto z: nums)
+        {
+            sum+=z;
+        }
+        if(count==0)
+        {
+            return sum;
+        }
+        int maxx=0,newsum=0;
+        while(j<nums.size())
+        {
+            newsum+=nums[j];
+            if((j-i+1)==count)
+            {
+                maxx=max(maxx,sum-newsum);
+                newsum-=nums[i];
+                i++;
+            }
+            
+            j++;
+        }
+    return maxx;
+    }
+};
