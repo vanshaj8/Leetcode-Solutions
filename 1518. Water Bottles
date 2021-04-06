@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int numWaterBottles(int numbottles, int numexchange) 
+    {
+        
+        int sum=numbottles;
+        int res=numbottles;
+        while(res>=numexchange)
+        {
+            numbottles=res/numexchange;
+            res=res%numexchange +numbottles;
+            sum+=numbottles;
+        }
+        
+        
+        return sum;
+    }
+};
