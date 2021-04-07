@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool checkOnesSegment(string s)
+    {
+     
+        bool zero=false;
+        for(auto b : s)
+        {
+           if(b=='1')
+           {
+               if(zero)
+               {
+                   return false;
+               }
+           }
+            else
+            {
+                zero=true;
+            }
+        }
+        
+        return true;
+    }
+};
