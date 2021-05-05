@@ -1,0 +1,28 @@
+class Solution
+{
+    public:
+    //Function to remove duplicates from unsorted linked list.
+    Node * removeDuplicates( Node *head) 
+    {
+        unordered_set<int>s;
+        Node* curr=head;
+        Node* prev;
+        
+        while(curr!=NULL)
+        {
+            if(s.find(curr->data)!=s.end())
+            {
+                prev->next=curr->next;
+                
+            }
+            else
+            {
+                s.insert(curr->data);
+                prev=curr;
+            }
+            curr=curr->next;
+        }
+        
+        return head;
+    }
+};
