@@ -1,0 +1,86 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{
+  int data;
+  Node* next;
+};
+Node* head;
+Node* tail;
+
+void addnode(int value)
+{
+  Node* temp=new Node();
+  temp->data=value;
+  temp->next=NULL;
+
+  if(head==NULL)
+  {
+    head=temp;
+    tail=temp;
+  }
+  else
+  {
+    temp->next=tail->next;
+    tail->next=temp;
+    tail=temp;
+  }
+
+}
+
+void display()
+{
+  Node* ptr;
+  ptr=head;
+
+  while(ptr!=NULL)
+  {
+    cout<<ptr->data<<" ";
+    ptr=ptr->next;
+  }
+}
+void reverse()
+{
+  Node* current=head;
+  Node* next=NULL;
+  Node* prev=NULL;
+  while(current!=NULL)
+  {
+    next=current->next;
+    current->next=prev;
+    prev=current;
+    current=next;
+  }
+  head=prev;
+}
+
+void move_to_node()
+{
+  Node* seclast=NULL;
+  Node* last=head;
+
+  while(last->next!=NULL)
+  {
+    seclast=last;
+    last=last->next;
+  }
+  seclast->next=NULL;
+  last->next=head;
+
+  head=last;
+}
+int main()
+{
+  addnode(1);
+	addnode(2);
+	addnode(3);
+	addnode(4);
+	addnode(5);
+  display();
+  move_to_node();
+	cout<<"\n";
+	display();
+
+
+  return 0;
+}
