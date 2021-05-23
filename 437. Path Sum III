@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void pathsumk(TreeNode* root,int sum,vector<int>&v,int &count)
+    {
+        if(!root) return ;
+        v.push_back(root->val);
+        int f=0;
+        for(int j=v.size()-1;j>=0;j--)
+        {
+            f+=v[j];
+            if(f==sum)
+            {
+                count++;
+            }
+        }
+        pathsumk(root->left,sum,v,count);
+        pathsumk(root->right,sum,v,count);
+        v.pop_back();
+    }
+    int pathSum(TreeNode* root, int targetSum) 
+    {
+        int count=0;
+        vector<int>v;
+        pathsumk(root,targetSum,v,count);
+        
+        return count;
+    }
+};
